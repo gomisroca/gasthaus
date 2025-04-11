@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'landing',
   imports: [],
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css'
 })
-export class LandingComponent {
-
-}
+export class LandingComponent {}

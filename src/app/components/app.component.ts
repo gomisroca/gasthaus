@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { SpeisekarteComponent } from './speisekarte/speisekarte.component';
+import { KontaktComponent } from './kontakt/kontakt.component';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  selector: 'root',
+  imports: [SpeisekarteComponent, KontaktComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'gasthaus';
