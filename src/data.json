@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Sauerbraten",
+    "ingredients": ["beef", "wine vinegar", "red cabbage", "potato"],
+    "price": 15,
+    "vegan": false
+  },
+  {
+    "id": 2,
+    "name": "Schnitzel",
+    "ingredients": ["pork", "breadcrumbs", "egg", "flour"],
+    "price": 13,
+    "vegan": false
+  },
+  {
+    "id": 3,
+    "name": "Spaetzle",
+    "ingredients": ["flour", "egg", "milk", "salt"],
+    "price": 11,
+    "vegan": false
+  },
+  {
+    "id": 4,
+    "name": "Bratwurst",
+    "ingredients": ["pork", "spices"],
+    "price": 7,
+    "vegan": false
+  },
+  {
+    "id": 5,
+    "name": "Kartoffelpuffer",
+    "ingredients": ["potato", "onion", "egg", "flour", "salt"],
+    "price": 7,
+    "vegan": false
+  }
+]
