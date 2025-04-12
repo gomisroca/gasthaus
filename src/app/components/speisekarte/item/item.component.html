@@ -1,0 +1,19 @@
+<li
+  class="h-full flex gap-2 p-2 justify-between backdrop-blur cursor-default shadow-md hover:shadow-lg transition duration-200 relative ease-in-out border border-transparent hover:border-white/30 hover:backdrop-blur-lg hover:scale-150 hover:z-50"
+>
+  <section class="flex items-center">
+    <item-image [id]="item().id" [name]="item().name"></item-image>
+  </section>
+  <section class="flex flex-col gap-2 items-start flex-1 px-2">
+    <h3 class="font-semibold text-lg">{{ item().name }}</h3>
+    <p
+      class="border-b border-t border-white/30 flex-1 tracking-tight line-clamp-3 italic text-neutral-800 w-full"
+    >
+      {{ item().description }}
+    </p>
+    <section class="flex w-full justify-between items-center">
+      <item-tags [tags]="item().tags"></item-tags>
+      <span class="font-bold">{{ item().price }}€</span>
+    </section>
+  </section>
+</li>
