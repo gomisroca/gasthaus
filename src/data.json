@@ -1,37 +1,53 @@
-[
-  {
-    "id": 1,
-    "name": "Sauerbraten",
-    "ingredients": ["beef", "wine vinegar", "red cabbage", "potato"],
-    "price": 15,
-    "vegan": false
-  },
-  {
-    "id": 2,
-    "name": "Schnitzel",
-    "ingredients": ["pork", "breadcrumbs", "egg", "flour"],
-    "price": 13,
-    "vegan": false
-  },
-  {
-    "id": 3,
-    "name": "Spaetzle",
-    "ingredients": ["flour", "egg", "milk", "salt"],
-    "price": 11,
-    "vegan": false
-  },
-  {
-    "id": 4,
-    "name": "Bratwurst",
-    "ingredients": ["pork", "spices"],
-    "price": 7,
-    "vegan": false
-  },
-  {
-    "id": 5,
-    "name": "Kartoffelpuffer",
-    "ingredients": ["potato", "onion", "egg", "flour", "salt"],
-    "price": 7,
-    "vegan": false
-  }
-]
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Sauerbraten",
+      "description": "Spaetzle mit Spaetzle mit Kartoffeln Spaetzle mit Kartoffeln",
+      "categories": ["Saisonal", "Hauptgänge", "Vorspeisen", "Dessert"],
+      "tags": ["vegan", "spicy", "childFriendly"],
+      "price": 15
+    },
+    {
+      "id": 2,
+      "name": "Schnitzel",
+      "description": "Spaetzle mit Kartoffeln",
+      "categories": ["Hauptgänge", "Vorspeisen"],
+      "tags": ["childFriendly", "lactose"],
+      "price": 13
+    },
+    {
+      "id": 3,
+      "name": "Spaetzle",
+      "description": "Spaetzle mit Kartoffeln",
+      "categories": ["Hauptgänge", "Aperitif", "Vorspeisen"],
+      "tags": ["childFriendly", "lactose"],
+      "price": 11
+    },
+    {
+      "id": 4,
+      "name": "Bratwurst",
+      "description": "Spaetzle mit Kartoffeln",
+      "categories": ["Saisonal", "Hauptgänge", "Vorspeisen"],
+      "tags": ["spicy"],
+      "price": 7
+    },
+    {
+      "id": 5,
+      "name": "Kartoffelpuffer",
+      "description": "Spaetzle mit Kartoffeln",
+      "categories": ["Saisonal", "Vorspeisen"],
+      "tags": ["vegan", "childFriendly"],
+      "price": 7
+    }
+  ],
+  "categories": [
+    "Saisonal",
+    "Aperitif",
+    "Vorspeisen",
+    "Suppen",
+    "Hauptgänge",
+    "Desserts",
+    "Getränke"
+  ]
+}
