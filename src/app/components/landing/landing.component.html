@@ -1,10 +1,32 @@
-<main class="flex justify-center items-center h-[600px] relative">
-  <img
-    src="assets/images/speisekarte/2.jpg"
-    alt="Landing"
-    class="h-[600px] w-full absolute bg-neutral-700 object-cover"
-  />
-  <div class="z-10">
+<main
+  class="flex flex-col justify-center items-center min-h-screen bg-[url('/assets/images/speisekarte/2.jpg')] bg-cover bg-center bg-fixed"
+>
+  <!-- Title section -->
+  <section class="flex flex-col items-center justify-center tracking-tight">
     <h1 class="text-9xl font-bold text-white">Gasthaus</h1>
-  </div>
+    <h2 class="text-2xl font-semibold text-white">seit 1990</h2>
+  </section>
+  <!-- Description section -->
+  <section
+    class="flex flex-col items-center justify-center w-1/3 text-justify text-xl mt-4 text-white bg-black/20 p-4"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+    Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
+    sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a,
+    semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie,
+    enim est eleifend mi, non fermentum diam nisl sit amet erat.
+  </section>
+  <!-- Links section -->
+  <section class="flex items-center justify-between w-1/4 mt-10">
+    <a
+      href="#speisekarte"
+      class="hover:scale-150 text-4xl relative hover:z-10 border border-transparent active:duration-100 text-white hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+      >Speisekarte</a
+    >
+    <a
+      href="#kontakt"
+      class="hover:scale-150 text-4xl relative hover:z-10 border border-transparent active:duration-100 text-white hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+      >Reservieren</a
+    >
+  </section>
 </main>
