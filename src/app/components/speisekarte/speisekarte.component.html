@@ -1,33 +1,33 @@
-<main class="flex justify-center items-center h-[600px]">
-  <!-- <img
-    src="assets/images/speisekarte/1.jpg"
-    alt="Speisekarte"
-    class="h-[600px] w-full absolute bg-neutral-700 object-cover"
-  /> -->
-  <div class="h-[600px] w-full absolute bg-neutral-400"></div>
-
-  <div class="z-10 flex flex-col gap-2 items-center justify-start">
-    <h1 class="text-7xl font-bold text-white">Speisekarte</h1>
-    <ul class="flex flex-wrap gap-2 justify-center">
-      @for (cat of categories; track cat) {
-      <button
-        type="button"
-        [disabled]="category() === cat"
-        [class.pointer-events-none]="category() === cat"
-        [class.opacity-65]="category() === cat"
-        class="hover:scale-150 relative hover:z-10 border border-transparent active:duration-100 hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
-        (click)="setCategory(cat)"
-      >
-        {{ cat }}
-      </button>
-      }
-    </ul>
-    @if (category()) {
-    <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] w-2/3">
-      @for (item of items(); track item.id) {
-      <item [item]="item" class="w-[350px] h-[160px]"></item>
-      }
-    </ul>
-    }
+<main
+  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/speisekarte/1.jpg')] bg-cover bg-center bg-fixed"
+>
+  <!-- Title section -->
+  <div class="flex items-center h-[500px]">
+    <h1 class="text-9xl font-bold text-white sticky top-0">Speisekarte</h1>
   </div>
+
+  <!-- Category Buttons -->
+  <ul class="flex flex-wrap gap-4 justify-center py-6">
+    @for (cat of categories; track cat) {
+    <button
+      type="button"
+      [disabled]="category() === cat"
+      [class.pointer-events-none]="category() === cat"
+      [class.opacity-65]="category() === cat"
+      class="hover:scale-150 relative hover:z-10 border border-transparent active:duration-100 hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+      (click)="setCategory(cat)"
+    >
+      {{ cat }}
+    </button>
+    }
+  </ul>
+
+  <!-- Items List -->
+  @if (category()) {
+  <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] w-2/3 my-24">
+    @for (item of items(); track item.id) {
+    <item [item]="item" class="w-[350px] h-[160px]"></item>
+    }
+  </ul>
+  }
 </main>
