@@ -1,5 +1,58 @@
 <main
-  class="flex flex-col justify-center items-center min-h-screen bg-[url('/assets/images/speisekarte/3.jpg')] bg-cover bg-center bg-fixed"
+  class="text-white flex flex-col justify-center items-center min-h-screen bg-[url('/assets/images/speisekarte/3.jpg')] bg-cover bg-center bg-fixed"
 >
-  <h1 class="text-9xl font-bold text-white">Reservieren</h1>
+  <!-- Title section -->
+  <div class="flex items-center h-[300px]">
+    <h1 class="text-9xl font-bold text-white sticky top-0">Reservieren</h1>
+  </div>
+  <section class="flex flex-col gap-4 p-4 w-1/3 bg-black/20 backdrop-blur-sm">
+    <!-- Info section -->
+    <p>Sie finden uns in Ostheimer Weg 5, 64832 Babenhausen.</p>
+    <section class="flex flex-col">
+      <h6 class="font-semibold text-lg">Öffnungszeiten</h6>
+      <p>Montag bis Freitag von 10:00 bis 22:00 Uhr.</p>
+      <p>Sonntag und Feiertag von 16:00 bis 24:00 Uhr.</p>
+    </section>
+    <!-- Kontakt section -->
+    <section class="flex flex-col">
+      <h6 class="font-semibold text-lg">Kontakt</h6>
+      <p>
+        Wir freuen uns, Sie bei uns zu sehen. Bitte senden Sie uns Ihre Anfrage
+        per E-Mail oder Telefon.
+      </p>
+
+      <p>
+        Sie können uns eine E-Mail schreiben:
+        <a href="mailto:info@gasthaus.de">info&#64;gasthaus.de</a>
+      </p>
+      <p>oder per Telefon an +49 (0) 176 25 55 55 55</p>
+      <p>oder an unser Kontaktformular:</p>
+      <form class="flex flex-col gap-2">
+        <input
+          type="text"
+          placeholder="Name"
+          class="border-b border-white/30 p-2"
+        />
+        <input
+          type="text"
+          placeholder="E-Mail"
+          class="border-b border-white/30 p-2"
+        />
+        <input
+          type="text"
+          placeholder="Telefon"
+          class="border-b border-white/30 p-2"
+        />
+        <textarea
+          placeholder="Nachricht"
+          class="border-b border-white/30 p-2"
+        ></textarea>
+        <button
+          class="hover:scale-150 text-4xl relative hover:z-10 border border-transparent active:duration-100 text-white hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+        >
+          Absenden
+        </button>
+      </form>
+    </section>
+  </section>
 </main>
