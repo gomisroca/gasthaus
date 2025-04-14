@@ -3,11 +3,16 @@
 >
   <!-- Title section -->
   <div class="flex items-center h-[300px]">
-    <h1 class="text-9xl font-bold text-white sticky top-0">Reservieren</h1>
+    <h1 class="text-9xl font-bold">Reservieren</h1>
   </div>
-  <section class="flex flex-col gap-4 p-4 w-1/3 bg-black/20 backdrop-blur-sm">
+  <section
+    class="flex flex-col gap-4 p-4 w-1/3 bg-black/20 backdrop-blur hover:backdrop-blur-lg transition duration-200 ease-in-out"
+  >
     <!-- Info section -->
-    <p>Sie finden uns in Ostheimer Weg 5, 64832 Babenhausen.</p>
+    <p>
+      Sie finden uns in
+      <span class="font-bold text-lg">Ostheimer Weg 5, 64832 Babenhausen</span>.
+    </p>
     <section class="flex flex-col">
       <h6 class="font-semibold text-lg">Öffnungszeiten</h6>
       <p>Montag bis Freitag von 10:00 bis 22:00 Uhr.</p>
@@ -27,28 +32,28 @@
       </p>
       <p>oder per Telefon an +49 (0) 176 25 55 55 55</p>
       <p>oder an unser Kontaktformular:</p>
-      <form class="flex flex-col gap-2">
+      <form class="flex flex-col gap-2 mt-4">
         <input
           type="text"
           placeholder="Name"
-          class="border-b border-white/30 p-2"
+          class="border-b border-white/10 p-2"
         />
         <input
           type="text"
           placeholder="E-Mail"
-          class="border-b border-white/30 p-2"
+          class="border-b border-white/10 p-2"
         />
         <input
           type="text"
           placeholder="Telefon"
-          class="border-b border-white/30 p-2"
+          class="border-b border-white/10 p-2"
         />
         <textarea
           placeholder="Nachricht"
-          class="border-b border-white/30 p-2"
+          class="border-b border-white/10 p-2"
         ></textarea>
         <button
-          class="hover:scale-150 text-4xl relative hover:z-10 border border-transparent active:duration-100 text-white hover:border-white/30 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+          class="hover:scale-150 text-4xl relative hover:z-10 border border-transparent active:duration-100 hover:border-white/10 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
         >
           Absenden
         </button>
