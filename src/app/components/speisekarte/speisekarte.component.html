@@ -24,7 +24,7 @@
 
   <!-- Items List -->
   @if (category()) {
-  <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] w-2/3 my-24">
+  <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] w-2/3 my-10">
     @for (item of items(); track item.id) {
     <item [item]="item" class="w-[350px] h-[160px]"></item>
     }
