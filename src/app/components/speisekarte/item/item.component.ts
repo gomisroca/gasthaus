@@ -1,10 +1,10 @@
 import { Component, input } from '@angular/core';
 import { ItemImageComponent } from './item-image/item-image.component';
-import { ItemTagsComponent } from './item-tags/item-tags.component';
+import { ItemTagComponent } from './item-tag/item-tag.component';
 
 @Component({
   selector: 'item',
-  imports: [ItemImageComponent, ItemTagsComponent],
+  imports: [ItemImageComponent, ItemTagComponent],
   templateUrl: './item.component.html',
 })
 export class ItemComponent {
