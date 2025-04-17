@@ -36,6 +36,7 @@ export class ItemTagComponent {
 
   tag = input.required<string>();
   expanded = signal(false);
+  timeout = signal<NodeJS.Timeout | undefined>(undefined);
 
   private onClickOutside = (event: MouseEvent) => {
     if (
@@ -49,7 +50,13 @@ export class ItemTagComponent {
   constructor(private elementRef: ElementRef) {}
 
   handleClick() {
+    clearTimeout(this.timeout());
     this.expanded.update((expanded) => !expanded);
+
+    const newTimeout = setTimeout(() => {
+      this.expanded.set(false);
+    }, 5000);
+    this.timeout.set(newTimeout);
   }
 
   ngAfterViewInit() {
