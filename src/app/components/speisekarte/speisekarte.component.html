@@ -1,20 +1,24 @@
 <main
-  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/speisekarte/1.jpg')] bg-cover bg-center bg-fixed"
+  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/speisekarte/1.jpg')] bg-cover bg-center bg-fixed w-screen"
 >
   <!-- Title section -->
-  <div class="flex items-center h-[300px]">
-    <h1 class="text-9xl font-bold text-white sticky top-0">Speisekarte</h1>
+  <div
+    class="flex items-end lg:items-center h-[150px] lg:h-[225px] xl:h-[300px] tracking-tight md:tracking-normal"
+  >
+    <h1 class="md:text-9xl text-6xl font-bold text-white sticky top-0">
+      Speisekarte
+    </h1>
   </div>
 
   <!-- Category Buttons -->
-  <ul class="flex flex-wrap gap-4 justify-center py-6">
+  <ul class="flex flex-wrap gap-2 md:gap-4 justify-center pt-6">
     @for (cat of categories; track cat) {
     <button
       type="button"
       [disabled]="category() === cat"
       [class.pointer-events-none]="category() === cat"
       [class.opacity-65]="category() === cat"
-      class="hover:scale-150 relative hover:z-10 border border-transparent active:duration-100 hover:border-white/10 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-4 py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+      class="hover:scale-150 relative hover:z-10 border border-transparent active:duration-100 hover:border-white/10 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
       (click)="setCategory(cat)"
     >
       {{ cat }}
@@ -24,7 +28,7 @@
 
   <!-- Items List -->
   @if (category()) {
-  <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] w-2/3 my-10">
+  <ul class="max-w-6xl flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
     @for (item of items(); track item.id) {
     <item [item]="item" class="w-[350px] h-[160px]"></item>
     }
