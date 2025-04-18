@@ -10,9 +10,4 @@ import { LandingComponent } from './landing/landing.component';
 })
 export class AppComponent {
   title = 'gasthaus';
-  firstName = signal('John');
-
-  onClick() {
-    this.firstName.update((name) => name.toUpperCase());
-  }
 }
