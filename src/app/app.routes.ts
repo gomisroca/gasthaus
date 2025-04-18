@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { SpeisekarteComponent } from './components/speisekarte/speisekarte.component';
+import { AppComponent } from './components/app.component';
 
-export const routes: Routes = [
-  { path: 'speisekarte', component: SpeisekarteComponent },
-];
+export const routes: Routes = [{ path: '/', component: AppComponent }];
