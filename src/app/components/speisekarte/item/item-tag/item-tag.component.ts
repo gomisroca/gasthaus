@@ -1,4 +1,12 @@
-import { Component, ElementRef, input, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  input,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'item-tag',
@@ -37,6 +45,7 @@ export class ItemTagComponent {
   tag = input.required<string>();
   expanded = signal(false);
   timeout = signal<NodeJS.Timeout | undefined>(undefined);
+  private isBrowser: boolean;
 
   private onClickOutside = (event: MouseEvent) => {
     if (
@@ -47,7 +56,12 @@ export class ItemTagComponent {
     }
   };
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   handleClick() {
     clearTimeout(this.timeout());
@@ -60,10 +74,17 @@ export class ItemTagComponent {
   }
 
   ngAfterViewInit() {
-    document.addEventListener('click', this.onClickOutside, true);
+    if (this.isBrowser) {
+      document.addEventListener('click', this.onClickOutside, true);
+    }
   }
 
   ngOnDestroy() {
-    document.removeEventListener('click', this.onClickOutside, true);
+    if (this.isBrowser) {
+      if (this.timeout()) {
+        clearTimeout(this.timeout());
+      }
+      document.removeEventListener('click', this.onClickOutside, true);
+    }
   }
 }
