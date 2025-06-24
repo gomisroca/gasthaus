@@ -1,11 +1,13 @@
 <main
-  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/speisekarte/1.jpg')] bg-cover bg-center bg-fixed w-screen"
+  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/background/2.jpg')] bg-cover bg-center bg-fixed w-screen"
 >
   <!-- Title section -->
   <div
     class="flex items-end lg:items-center h-[150px] lg:h-[225px] xl:h-[300px] tracking-tight md:tracking-normal"
   >
-    <h1 class="md:text-9xl text-6xl font-bold text-white sticky top-0">
+    <h1
+      class="md:text-9xl text-5xl sm:text-6xl font-bold text-white drop-shadow-md sticky top-0"
+    >
       Speisekarte
     </h1>
   </div>
@@ -18,7 +20,7 @@
       [disabled]="category() === cat"
       [class.pointer-events-none]="category() === cat"
       [class.opacity-65]="category() === cat"
-      class="hover:scale-150 relative hover:z-10 border border-transparent active:duration-100 hover:border-white/10 hover:shadow-lg shadow-md backdrop-blur hover:backdrop-blur-lg px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-90 cursor-pointer"
+      class="hover:scale-125 border-b-2 border-white lg:border-black text-white bg-black/80 backdrop-blur-sm hover:bg-black hover:border-white active:bg-black/90 relative hover:z-10 active:duration-100 hover:shadow-lg shadow-md px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-100 cursor-pointer"
       (click)="setCategory(cat)"
     >
       {{ cat }}
@@ -30,7 +32,7 @@
   @if (category()) {
   <ul class="max-w-6xl flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
     @for (item of items(); track item.id) {
-    <item [item]="item" class="w-[350px] h-[160px]"></item>
+    <item [item]="item" class="w-full mx-2 md:w-[350px] h-[160px]"></item>
     }
   </ul>
   }
