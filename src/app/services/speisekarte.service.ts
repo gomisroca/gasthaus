@@ -12,13 +12,17 @@ export class SpeisekarteService {
 
   constructor(private http: HttpClient) {}
 
+  getItems(): Observable<SpeisekarteItem[]> {
+    return this.http.get<SpeisekarteItem[]>(`${this.apiUrl}/speisekarte/`);
+  }
+
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/speisekarte/categories`);
   }
 
   getCategory(category: string): Observable<SpeisekarteItem[]> {
     return this.http.get<SpeisekarteItem[]>(
-      `${this.apiUrl}/speisekarte?category=${category}`
+      `${this.apiUrl}/speisekarte/?category=${category}`
     );
   }
 }

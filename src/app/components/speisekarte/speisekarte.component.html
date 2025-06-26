@@ -13,6 +13,16 @@
   </div>
 
   <!-- Category Buttons -->
+  <button
+    type="button"
+    [disabled]="category() === null"
+    [class.pointer-events-none]="category() === null"
+    [class.opacity-65]="category() === null"
+    class="hover:scale-125 border-b-2 border-white lg:border-black text-white bg-black/80 backdrop-blur-sm hover:bg-black hover:border-white active:bg-black/90 relative hover:z-10 active:duration-100 hover:shadow-lg shadow-md px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-100 cursor-pointer"
+    (click)="setCategory(null)"
+  >
+    Alle Kategorien
+  </button>
   <ul class="flex flex-wrap gap-2 md:gap-4 justify-center pt-6">
     @for (cat of categories(); track cat) {
     <button
@@ -29,11 +39,9 @@
   </ul>
 
   <!-- Items List -->
-  @if (category()) {
   <ul class="max-w-6xl flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
     @for (item of items(); track item.id) {
     <item [item]="item" class="w-full mx-2 md:w-[350px] h-[160px]"></item>
     }
   </ul>
-  }
 </main>
