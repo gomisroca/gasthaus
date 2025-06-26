@@ -1,6 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { SpeisekarteService } from '../../services/speisekarte.service';
 import { ItemComponent } from './item/item.component';
+import { SpeisekarteItem } from '../../../../types';
 
 @Component({
   selector: 'speisekarte',
@@ -9,19 +10,26 @@ import { ItemComponent } from './item/item.component';
 })
 export class SpeisekarteComponent {
   private speisekarteService = inject(SpeisekarteService);
-  categories = this.speisekarteService.getCategories();
+
+  categories = signal<string[]>([]); // signal holding string array
+
+  constructor() {
+    this.speisekarteService.getCategories().subscribe({
+      next: (cats) => this.categories.set(cats),
+      error: (err) => console.error('Failed to load categories', err),
+    });
+  }
 
   category = signal<string>('Saisonal');
-  items = computed<
-    {
-      id: number;
-      name: string;
-      description: string;
-      categories: string[];
-      tags: string[];
-      price: number;
-    }[]
-  >(() => this.speisekarteService.getCategory(this.category()));
+
+  readonly items = signal<SpeisekarteItem[]>([]);
+
+  readonly effectRef = effect(() => {
+    const category = this.category();
+    this.speisekarteService.getCategory(category).subscribe((items) => {
+      this.items.set(items);
+    });
+  });
 
   setCategory(category: string) {
     this.category.update(() => category);
