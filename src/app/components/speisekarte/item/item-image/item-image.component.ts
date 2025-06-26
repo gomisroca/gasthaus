@@ -6,6 +6,6 @@ import { Component, input } from '@angular/core';
   templateUrl: './item-image.component.html',
 })
 export class ItemImageComponent {
-  id = input.required<number>();
+  id = input.required<string>();
   name = input.required<string>();
 }
