@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
-import data from '../../data.json';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { SpeisekarteItem } from '../../../types';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpeisekarteService {
-  data = data;
+  private apiUrl = environment.apiUrl;
 
-  getItems() {
-    return this.data.items;
+  constructor(private http: HttpClient) {}
+
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/speisekarte/categories`);
   }
 
-  getCategories() {
-    return this.data.categories;
-  }
-
-  getCategory(category: string) {
-    return this.data.items.filter((item) => item.categories.includes(category));
+  getCategory(category: string): Observable<SpeisekarteItem[]> {
+    return this.http.get<SpeisekarteItem[]>(
+      `${this.apiUrl}/speisekarte?category=${category}`
+    );
   }
 }
