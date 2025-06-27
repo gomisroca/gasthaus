@@ -1,44 +1,37 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
-import { inject, PLATFORM_ID } from '@angular/core';
+import {
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEvent,
+} from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const platformId = inject(PLATFORM_ID);
+export const authInterceptor: HttpInterceptorFn = (
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn
+): Observable<HttpEvent<unknown>> => {
+  const authService = inject(AuthService);
+  const token = authService.getToken();
 
-  // Check if we're running in the browser
-  if (isPlatformBrowser(platformId)) {
-    // Browser-specific logic (e.g., reading from localStorage)
-    const token = localStorage.getItem('authToken');
-
-    if (token) {
-      const authReq = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return next(authReq);
-    }
-  } else {
-    // Server-side logic
-    // You might get tokens from cookies, environment variables, or other server-side sources
-    const serverToken = getServerToken(); // Your custom logic here
-
-    if (serverToken) {
-      const authReq = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${serverToken}`,
-        },
-      });
-      return next(authReq);
-    }
+  if (!token) {
+    return next(req);
   }
 
-  return next(req);
-};
+  const headersConfig: { [name: string]: string } = {
+    Authorization: `Bearer ${token}`,
+  };
 
-// Helper function for server-side token retrieval
-function getServerToken(): string | null {
-  // Example: Get from environment variable or server-side storage
-  // This is where you'd implement your server-side token logic
-  return process.env['API_TOKEN'] || null;
-}
+  const clonedReq =
+    req.body instanceof FormData
+      ? req.clone({ setHeaders: headersConfig })
+      : req.clone({
+          setHeaders: {
+            ...headersConfig,
+            'Content-Type': 'application/json',
+          },
+        });
+
+  return next(clonedReq);
+};
