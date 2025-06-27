@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SpeisekarteItem } from '../../../types';
 import { environment } from '../../environments/environment';
+
+export interface NewSpeisekarteItem {
+  name: string;
+  description: string;
+  price: number;
+  categories: string[];
+  tags: string[];
+  seasonal: boolean;
+  image: File;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +34,22 @@ export class SpeisekarteService {
     return this.http.get<SpeisekarteItem[]>(
       `${this.apiUrl}/speisekarte/?category=${category}`
     );
+  }
+
+  addItem(item: NewSpeisekarteItem): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', item.name);
+    formData.append('description', item.description);
+    formData.append('price', item.price.toString());
+
+    item.categories.forEach((cat) => formData.append('categories', cat));
+    item.tags.forEach((tag) => formData.append('tags', tag));
+
+    formData.append('seasonal', item.seasonal.toString());
+    formData.append('image', item.image);
+
+    return this.http.post(`${this.apiUrl}/speisekarte/`, formData, {
+      withCredentials: true,
+    });
   }
 }
