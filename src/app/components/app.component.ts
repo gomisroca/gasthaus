@@ -1,11 +1,9 @@
-import { Component, signal } from '@angular/core';
-import { SpeisekarteComponent } from './speisekarte/speisekarte.component';
-import { KontaktComponent } from './kontakt/kontakt.component';
-import { LandingComponent } from './landing/landing.component';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'root',
-  imports: [SpeisekarteComponent, KontaktComponent, LandingComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
