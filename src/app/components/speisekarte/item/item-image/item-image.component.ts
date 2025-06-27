@@ -1,11 +1,23 @@
-import { Component, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'item-image',
-  imports: [],
-  templateUrl: './item-image.component.html',
+  template: `<img
+    [src]="imageSrc"
+    alt="{{ name }}"
+    (error)="onImageError($event)"
+  />`,
 })
 export class ItemImageComponent {
-  id = input.required<string>();
-  name = input.required<string>();
+  @Input() name!: string;
+  @Input() image: string | null = null;
+
+  get imageSrc(): string {
+    return this.image ?? 'assets/images/placeholder.jpg';
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/images/placeholder.jpg';
+  }
 }
