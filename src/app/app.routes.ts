@@ -15,11 +15,38 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'admin',
+    path: 'admin/add',
     loadComponent: () =>
-      import('./components/admin/admin.component').then(
-        (m) => m.AdminComponent
+      import('./components/admin/add/add.component').then(
+        (m) => m.AddComponent
       ),
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'add',
+        loadComponent: () =>
+          import('./components/admin/add/add.component').then(
+            (m) => m.AddComponent
+          ),
+      },
+      {
+        path: 'update',
+        loadComponent: () =>
+          import('./components/admin/add/add.component').then(
+            (m) => m.AddComponent
+          ),
+      },
+      {
+        path: 'remove',
+        loadComponent: () =>
+          import('./components/admin/add/add.component').then(
+            (m) => m.AddComponent
+          ),
+      },
+    ],
   },
 ];

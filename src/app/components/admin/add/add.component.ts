@@ -5,15 +5,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SpeisekarteService } from '../../services/speisekarte.service';
+import { SpeisekarteService } from '../../../services/speisekarte.service';
 
 @Component({
-  selector: 'admin',
+  selector: 'add-item',
   imports: [ReactiveFormsModule],
   standalone: true,
-  templateUrl: './admin.component.html',
+  templateUrl: './add.component.html',
 })
-export class AdminComponent {
+export class AddComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private service: SpeisekarteService) {
