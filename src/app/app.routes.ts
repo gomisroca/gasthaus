@@ -39,13 +39,6 @@ export const routes: Routes = [
             (m) => m.UpdateComponent
           ),
       },
-      {
-        path: 'remove/:id',
-        loadComponent: () =>
-          import('./components/admin/remove/remove.component').then(
-            (m) => m.RemoveComponent
-          ),
-      },
     ],
   },
 ];
