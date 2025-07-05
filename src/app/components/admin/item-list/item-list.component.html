@@ -9,7 +9,7 @@
     </section>
     <section class="flex gap-8 items-center p-4">
       <a [href]="'/admin/update/' + item.id">Update</a>
-      <a [href]="'/admin/remove/' + item.id">Remove</a>
+      <button (click)="onRemove(item.id)">Remove</button>
     </section>
   </div>
   }

@@ -17,4 +17,18 @@ export class ItemListComponent {
       error: (err) => console.error('Failed to load items', err),
     });
   }
+
+  onRemove(id: string) {
+    const confirmed = confirm('Are you sure you want to remove this item?');
+    if (!confirmed) return;
+    this.speisekarteService.deleteItem(id).subscribe({
+      next: () => {
+        alert('Item removed!');
+        const currentItems = this.items();
+        const updatedItems = currentItems.filter((item) => item.id !== id);
+        this.items.set(updatedItems);
+      },
+      error: (err) => console.error('Remove failed:', err),
+    });
+  }
 }
