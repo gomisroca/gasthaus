@@ -15,14 +15,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'admin/add',
-    loadComponent: () =>
-      import('./components/admin/add/add.component').then(
-        (m) => m.AddComponent
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'admin',
     canActivate: [AuthGuard],
     children: [
@@ -34,17 +26,24 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'update',
+        path: 'items',
         loadComponent: () =>
-          import('./components/admin/add/add.component').then(
-            (m) => m.AddComponent
+          import('./components/admin/item-list/item-list.component').then(
+            (m) => m.ItemListComponent
           ),
       },
       {
-        path: 'remove',
+        path: 'update/:id',
         loadComponent: () =>
-          import('./components/admin/add/add.component').then(
-            (m) => m.AddComponent
+          import('./components/admin/update/update.component').then(
+            (m) => m.UpdateComponent
+          ),
+      },
+      {
+        path: 'remove/:id',
+        loadComponent: () =>
+          import('./components/admin/remove/remove.component').then(
+            (m) => m.RemoveComponent
           ),
       },
     ],
