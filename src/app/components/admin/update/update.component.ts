@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { SpeisekarteService } from '../../../services/speisekarte.service';
 import { SpeisekarteItem } from '../../../../../types';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'update-item',
@@ -31,7 +31,11 @@ export class UpdateComponent {
     image: null,
   });
 
-  constructor(private fb: FormBuilder, private service: SpeisekarteService) {
+  constructor(
+    private fb: FormBuilder,
+    private service: SpeisekarteService,
+    private router: Router
+  ) {
     this.activatedRoute.params.subscribe((params) => {
       this.id.set(params['id']);
     });
@@ -93,8 +97,11 @@ export class UpdateComponent {
   onSubmit() {
     if (this.form.valid) {
       this.service.updateItem(this.form.value as any).subscribe({
-        next: () => alert('Item added!'),
-        error: (err) => console.error('Add failed:', err),
+        next: () => {
+          alert('Item updated!');
+          this.router.navigate(['/admin/items']);
+        },
+        error: (err) => console.error('Update failed:', err),
       });
     }
   }
