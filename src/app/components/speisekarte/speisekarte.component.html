@@ -24,7 +24,7 @@
     Alle Kategorien
   </button>
   <ul class="flex flex-wrap gap-2 md:gap-4 justify-center pt-6">
-    @for (cat of categories(); track cat) {
+    @if (categories().length > 0) { @for (cat of categories(); track cat) {
     <button
       type="button"
       [disabled]="category() === cat"
@@ -35,13 +35,13 @@
     >
       {{ cat }}
     </button>
-    }
+    }}
   </ul>
 
   <!-- Items List -->
   <ul class="max-w-6xl flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
-    @for (item of items(); track item.id) {
+    @if (items().length > 0) { @for (item of items(); track item.id) {
     <item [item]="item" class="w-full mx-2 md:w-[350px] h-[160px]"></item>
-    }
+    }}
   </ul>
 </main>
