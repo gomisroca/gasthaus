@@ -1,15 +1,24 @@
 <ul class="flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
   @if (items().length > 0) { @for (item of items(); track item.id) {
   <div
-    class="w-full flex flex-col items-center gap-4 border-black/20 justify-center mx-2 md:w-[350px] border"
+    class="hover:scale-110 flex flex-col border-2 border-neutral-300 hover:border-neutral-500 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out"
   >
     <section class="flex flex-col items-center">
       <img [src]="item.image" alt="item.name" class="h-[100px]" />
       <h1>{{ item.name }}</h1>
     </section>
     <section class="flex gap-8 items-center p-4">
-      <a [href]="'/admin/update/' + item.id">Update</a>
-      <button (click)="onRemove(item.id)">Remove</button>
+      <a
+        [href]="'/admin/update/' + item.id"
+        class="hover:scale-110 shadow-md rounded-sm p-1 bg-sky-400 hover:bg-sky-500 active:scale-90 active:duration-100 text-white font-extrabold tracking-widest uppercase transition duration-200 ease-in-out cursor-pointer"
+        >Update</a
+      >
+      <button
+        (click)="onRemove(item.id)"
+        class="hover:scale-110 shadow-md rounded-sm p-1 bg-sky-400 hover:bg-sky-500 active:scale-90 active:duration-100 text-white font-extrabold tracking-widest uppercase transition duration-200 ease-in-out cursor-pointer"
+      >
+        Remove
+      </button>
     </section>
   </div>
   }}
