@@ -1,25 +1,19 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  Inject,
-  input,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
+import { Component, ElementRef, Inject, input, PLATFORM_ID, signal } from '@angular/core';
 
 @Component({
-  selector: 'item-tag',
+  selector: 'app-item-tag',
   imports: [],
   templateUrl: './item-tag.component.html',
 })
 export class ItemTagComponent {
-  tagData: {
-    [key: string]: {
+  tagData: Record<
+    string,
+    {
       icon: string;
       text: string;
-    };
-  } = {
+    }
+  > = {
     vegan: {
       icon: '🌱',
       text: 'Vegan',
@@ -48,17 +42,14 @@ export class ItemTagComponent {
   private isBrowser: boolean;
 
   private onClickOutside = (event: MouseEvent) => {
-    if (
-      this.expanded() &&
-      !this.elementRef.nativeElement.contains(event.target)
-    ) {
+    if (this.expanded() && !this.elementRef.nativeElement.contains(event.target)) {
       this.expanded.set(false);
     }
   };
 
   constructor(
     private elementRef: ElementRef,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }

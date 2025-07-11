@@ -1,20 +1,17 @@
 <li
-  class="text-white h-full flex gap-2 p-2 justify-between backdrop-blur-sm hover:bg-black bg-black/80 cursor-default shadow-md hover:shadow-lg transition duration-200 relative ease-in-out hover:scale-150 hover:z-50"
->
+  class="relative flex h-full cursor-default justify-between gap-2 bg-black/80 p-2 text-white shadow-md backdrop-blur-sm transition duration-200 ease-in-out hover:z-50 hover:scale-150 hover:bg-black hover:shadow-lg">
   <section class="flex items-center">
-    <item-image [image]="item().image" [name]="item().name"></item-image>
+    <app-item-image [image]="item().image" [name]="item().name"></app-item-image>
   </section>
-  <section class="flex flex-col gap-2 items-start flex-1 px-2">
+  <section class="flex flex-1 flex-col items-start gap-2 px-2">
     <h3 class="font-semibold md:text-lg">{{ item().name }}</h3>
-    <p
-      class="border-b border-t border-white/60 flex-1 tracking-tight line-clamp-3 w-full text-xs sm:text-sm"
-    >
+    <p class="line-clamp-3 w-full flex-1 border-t border-b border-white/60 text-xs tracking-tight sm:text-sm">
       {{ item().description }}
     </p>
-    <section class="flex w-full justify-between items-center">
-      <ul class="flex gap-1 items-center">
+    <section class="flex w-full items-center justify-between">
+      <ul class="flex items-center gap-1">
         @for (tag of item().tags; track tag) {
-        <item-tag [tag]="tag"></item-tag>
+          <app-item-tag [tag]="tag"></app-item-tag>
         }
       </ul>
       <span class="font-bold">{{ item().price }}€</span>

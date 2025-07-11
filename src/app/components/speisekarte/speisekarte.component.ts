@@ -1,10 +1,11 @@
 import { Component, effect, inject, signal } from '@angular/core';
+
+import { SpeisekarteItem } from '../../../../types';
 import { SpeisekarteService } from '../../services/speisekarte.service';
 import { ItemComponent } from './item/item.component';
-import { SpeisekarteItem } from '../../../../types';
 
 @Component({
-  selector: 'speisekarte',
+  selector: 'app-speisekarte',
   imports: [ItemComponent],
   templateUrl: './speisekarte.component.html',
 })

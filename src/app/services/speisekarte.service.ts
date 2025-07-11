@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SpeisekarteItem } from '../../../types';
+import { Injectable } from '@angular/core';
+import { type Observable } from 'rxjs';
+
+import { type SpeisekarteItem } from '../../../types';
 import { environment } from '../../environments/environment';
 
 export interface NewSpeisekarteItem {
@@ -35,9 +36,7 @@ export class SpeisekarteService {
   }
 
   getCategory(category: string): Observable<SpeisekarteItem[]> {
-    return this.http.get<SpeisekarteItem[]>(
-      `${this.apiUrl}/speisekarte/?category=${category}`
-    );
+    return this.http.get<SpeisekarteItem[]>(`${this.apiUrl}/speisekarte/?category=${category}`);
   }
 
   addItem(item: NewSpeisekarteItem): Observable<any> {
@@ -57,9 +56,7 @@ export class SpeisekarteService {
     });
   }
 
-  updateItem(
-    item: { id: string; currentImage: string } & NewSpeisekarteItem
-  ): Observable<any> {
+  updateItem(item: { id: string; currentImage: string } & NewSpeisekarteItem): Observable<any> {
     const formData = new FormData();
     formData.append('name', item.name);
     formData.append('description', item.description);

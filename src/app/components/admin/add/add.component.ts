@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { SpeisekarteService } from '../../../services/speisekarte.service';
+import { type FormBuilder, type FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { type SpeisekarteService } from '../../../services/speisekarte.service';
 
 @Component({
-  selector: 'add-item',
+  selector: 'app-add-item',
   imports: [ReactiveFormsModule],
   standalone: true,
   templateUrl: './add.component.html',
@@ -16,7 +12,10 @@ import { SpeisekarteService } from '../../../services/speisekarte.service';
 export class AddComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: SpeisekarteService) {
+  constructor(
+    private fb: FormBuilder,
+    private service: SpeisekarteService
+  ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -58,7 +57,7 @@ export class AddComponent {
   onSubmit() {
     console.log('Submitting form', this.form.value);
     if (this.form.valid) {
-      this.service.addItem(this.form.value as any).subscribe({
+      this.service.addItem(this.form.value).subscribe({
         next: () => alert('Item added!'),
         error: (err) => console.error('Add failed:', err),
       });

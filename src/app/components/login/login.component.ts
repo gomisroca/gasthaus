@@ -1,28 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { filter, take } from 'rxjs';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   template: `
     <form (submit)="login()">
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="your@email.com"
-        required
-      />
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="your-password"
-        required
-      />
+      <input type="email" [(ngModel)]="email" name="email" placeholder="your@email.com" required />
+      <input type="password" [(ngModel)]="password" name="password" placeholder="your-password" required />
       <button type="submit">Login</button>
       <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
     </form>
@@ -35,7 +24,10 @@ export class LoginComponent {
   password = '';
   errorMsg = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.authService.isLoggedIn$
@@ -44,21 +36,19 @@ export class LoginComponent {
         take(1)
       )
       .subscribe(() => {
-        this.router.navigate(['/admin']);
+        void this.router.navigate(['/admin']);
       });
   }
 
   login() {
     this.errorMsg = '';
-    this.authService
-      .login({ email: this.email, password: this.password })
-      .subscribe({
-        next: () => {
-          this.router.navigate(['admin']);
-        },
-        error: () => {
-          this.errorMsg = 'Login failed. Please check your credentials.';
-        },
-      });
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
+      next: () => {
+        void this.router.navigate(['admin']);
+      },
+      error: () => {
+        this.errorMsg = 'Login failed. Please check your credentials.';
+      },
+    });
   }
 }

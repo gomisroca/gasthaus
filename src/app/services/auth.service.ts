@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, type Observable, tap } from 'rxjs';
+
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -20,18 +21,13 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey);
   }
 
-  login(credentials: {
-    email: string;
-    password: string;
-  }): Observable<{ token: string }> {
-    return this.http
-      .post<{ token: string }>(`${this.apiUrl}/auth/login`, credentials)
-      .pipe(
-        tap((response) => {
-          localStorage.setItem(this.tokenKey, response.token);
-          this._isLoggedIn.next(true);
-        })
-      );
+  login(credentials: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/auth/login`, credentials).pipe(
+      tap((response) => {
+        localStorage.setItem(this.tokenKey, response.token);
+        this._isLoggedIn.next(true);
+      })
+    );
   }
 
   logout(): void {
