@@ -84,6 +84,7 @@ const config = {
       },
     },
   ],
+  ignorePatterns: ['index.html', '*.html']
 };
 
 module.exports = config;
