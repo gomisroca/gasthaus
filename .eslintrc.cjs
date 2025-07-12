@@ -67,6 +67,12 @@ const config = {
             },
           },
         ],
+        '@typescript-eslint/unbound-method': [
+          'error',
+          {
+            ignoreStatic: true,
+          },
+        ],
       },
     },
     {
