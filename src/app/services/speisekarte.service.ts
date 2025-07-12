@@ -39,7 +39,7 @@ export class SpeisekarteService {
     return this.http.get<SpeisekarteItem[]>(`${this.apiUrl}/speisekarte/?category=${category}`);
   }
 
-  addItem(item: NewSpeisekarteItem): Observable<any> {
+  addItem(item: NewSpeisekarteItem): Observable<void> {
     const formData = new FormData();
     formData.append('name', item.name);
     formData.append('description', item.description);
@@ -51,12 +51,12 @@ export class SpeisekarteService {
     formData.append('seasonal', item.seasonal.toString());
     formData.append('image', item.image);
 
-    return this.http.post(`${this.apiUrl}/speisekarte/`, formData, {
+    return this.http.post<void>(`${this.apiUrl}/speisekarte/`, formData, {
       withCredentials: true,
     });
   }
 
-  updateItem(item: { id: string; currentImage: string } & NewSpeisekarteItem): Observable<any> {
+  updateItem(item: { id: string; currentImage: string } & NewSpeisekarteItem): Observable<void> {
     const formData = new FormData();
     formData.append('name', item.name);
     formData.append('description', item.description);
@@ -71,13 +71,13 @@ export class SpeisekarteService {
       formData.append('image', item.image);
     }
 
-    return this.http.put(`${this.apiUrl}/speisekarte/${item.id}`, formData, {
+    return this.http.put<void>(`${this.apiUrl}/speisekarte/${item.id}`, formData, {
       withCredentials: true,
     });
   }
 
-  deleteItem(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/speisekarte/${id}`, {
+  deleteItem(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/speisekarte/${id}`, {
       withCredentials: true,
     });
   }
