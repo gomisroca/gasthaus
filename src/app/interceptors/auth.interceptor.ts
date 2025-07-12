@@ -1,12 +1,8 @@
-import {
-  HttpInterceptorFn,
-  HttpRequest,
-  HttpHandlerFn,
-  HttpEvent,
-} from '@angular/common/http';
+import { type HttpEvent, type HttpHandlerFn, type HttpInterceptorFn, type HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { type Observable } from 'rxjs';
+
+import { AuthService } from '@/app/services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
@@ -19,7 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (
     return next(req);
   }
 
-  const headersConfig: { [name: string]: string } = {
+  const headersConfig: Record<string, string> = {
     Authorization: `Bearer ${token}`,
   };
 

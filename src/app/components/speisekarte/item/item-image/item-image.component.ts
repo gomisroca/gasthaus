@@ -1,12 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'item-image',
-  template: `<img
-    [src]="imageSrc"
-    alt="{{ name }}"
-    (error)="onImageError($event)"
-  />`,
+  selector: 'app-item-image',
+  template: `<img [src]="imageSrc" alt="{{ name }}" (error)="onImageError($event)" />`,
 })
 export class ItemImageComponent {
   @Input() name!: string;

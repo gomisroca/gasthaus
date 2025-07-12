@@ -2,97 +2,84 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
   enctype="multipart/form-data"
-  class="space-y-2 my-8 flex flex-col p-4 rounded-sm bg-neutral-100"
->
+  class="my-8 flex flex-col space-y-2 rounded-sm bg-neutral-100 p-4">
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">Name</h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Name</h6>
     <input
       formControlName="name"
       type="text"
       placeholder="Name"
       [value]="item().name"
       required
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">Description</h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Description</h6>
     <textarea
       formControlName="description"
       placeholder="Description"
       [value]="item().description"
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    ></textarea>
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100"></textarea>
   </label>
 
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">Price</h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Price</h6>
     <input
       formControlName="price"
       type="number"
       step="0.01"
       [value]="item().price"
       placeholder="Price"
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">
-      Categories (comma-separated)
-    </h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Categories (comma-separated)</h6>
     <input
       type="text"
       (input)="onCategoriesInput($event)"
       placeholder="Enter categories comma-separated"
       [value]="item().categories.join(', ')"
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">
-      Tags (comma-separated)
-    </h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Tags (comma-separated)</h6>
     <input
       type="text"
       (input)="onTagsInput($event)"
       placeholder="Enter tags comma-separated"
       [value]="item().tags.join(', ')"
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   <label class="flex flex-row items-center gap-x-4">
-    <h6 class="text-lg font-bold uppercase tracking-tight">Seasonal</h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Seasonal</h6>
     <input
       type="checkbox"
       formControlName="seasonal"
       [value]="item().seasonal"
-      class="rounded-sm bg-neutral-100 hover:bg-neutral-200 hover:scale-110 active:scale-90 active:duration-100 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm bg-neutral-100 transition duration-200 ease-in-out hover:scale-110 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   @if (item().image) {
-  <img [src]="item().image" alt="item.name" class="h-[200px]" />
+    <img [src]="item().image" alt="item.name" class="h-[200px]" />
   }
 
   <label class="flex flex-col">
-    <h6 class="text-lg font-bold uppercase tracking-tight">Picture</h6>
+    <h6 class="text-lg font-bold tracking-tight uppercase">Picture</h6>
     <input
       type="file"
       (change)="onFileChange($event)"
       accept="image/*"
-      class="border-2 border-neutral-300 hover:border-neutral-500 hover:scale-110 active:scale-90 active:duration-100 rounded-sm p-2 bg-neutral-100 hover:bg-neutral-200 transition duration-200 ease-in-out cursor-pointer"
-    />
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
   </label>
 
   <button
     type="submit"
     [disabled]="form.invalid"
-    class="shadow-md rounded-sm p-2 bg-sky-400 hover:bg-sky-500 hover:scale-110 active:scale-90 active:duration-100 text-white font-extrabold tracking-widest text-lg uppercase transition duration-200 ease-in-out cursor-pointer"
-  >
+    class="cursor-pointer rounded-sm bg-sky-400 p-2 text-lg font-extrabold tracking-widest text-white uppercase shadow-md transition duration-200 ease-in-out hover:scale-110 hover:bg-sky-500 active:scale-90 active:duration-100">
     Update Item
   </button>
 </form>

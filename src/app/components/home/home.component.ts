@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { SpeisekarteComponent } from '../speisekarte/speisekarte.component';
-import { KontaktComponent } from '../kontakt/kontakt.component';
-import { LandingComponent } from '../landing/landing.component';
+
+import { KontaktComponent } from '@/app/components/kontakt/kontakt.component';
+import { LandingComponent } from '@/app/components/landing/landing.component';
+import { SpeisekarteComponent } from '@/app/components/speisekarte/speisekarte.component';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   imports: [SpeisekarteComponent, KontaktComponent, LandingComponent],
   standalone: true,
   templateUrl: './home.component.html',

@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { SpeisekarteService } from '../../../services/speisekarte.service';
-import { SpeisekarteItem } from '../../../../../types';
+
+import { SpeisekarteService } from '@/app/services/speisekarte.service';
+import { type SpeisekarteItem } from '@/types';
 
 @Component({
-  selector: 'item-list',
+  selector: 'app-item-list',
   templateUrl: './item-list.component.html',
 })
 export class ItemListComponent {

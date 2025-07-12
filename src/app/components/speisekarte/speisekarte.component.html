@@ -1,15 +1,8 @@
 <main
-  class="flex flex-col justify-start items-center min-h-screen bg-[url('/assets/images/background/2.jpg')] bg-cover bg-center bg-fixed w-screen"
->
+  class="flex min-h-screen w-screen flex-col items-center justify-start bg-[url('/assets/images/background/2.jpg')] bg-cover bg-fixed bg-center">
   <!-- Title section -->
-  <div
-    class="flex items-end lg:items-center h-[150px] lg:h-[225px] xl:h-[300px] tracking-tight md:tracking-normal"
-  >
-    <h1
-      class="md:text-9xl text-5xl sm:text-6xl font-bold text-white drop-shadow-md sticky top-0"
-    >
-      Speisekarte
-    </h1>
+  <div class="flex h-[150px] items-end tracking-tight md:tracking-normal lg:h-[225px] lg:items-center xl:h-[300px]">
+    <h1 class="sticky top-0 text-5xl font-bold text-white drop-shadow-md sm:text-6xl md:text-9xl">Speisekarte</h1>
   </div>
 
   <!-- Category Buttons -->
@@ -18,30 +11,32 @@
     [disabled]="category() === null"
     [class.pointer-events-none]="category() === null"
     [class.opacity-65]="category() === null"
-    class="hover:scale-125 border-b-2 border-white lg:border-black text-white bg-black/80 backdrop-blur-sm hover:bg-black hover:border-white active:bg-black/90 relative hover:z-10 active:duration-100 hover:shadow-lg shadow-md px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-100 cursor-pointer"
-    (click)="setCategory(null)"
-  >
+    class="relative cursor-pointer border-b-2 border-white bg-black/80 px-2 py-1 font-semibold text-white shadow-md backdrop-blur-sm transition duration-200 ease-in-out hover:z-10 hover:scale-125 hover:border-white hover:bg-black hover:shadow-lg active:scale-100 active:bg-black/90 active:duration-100 md:px-4 md:py-2 lg:border-black"
+    (click)="setCategory(null)">
     Alle Kategorien
   </button>
-  <ul class="flex flex-wrap gap-2 md:gap-4 justify-center pt-6">
-    @if (categories().length > 0) { @for (cat of categories(); track cat) {
-    <button
-      type="button"
-      [disabled]="category() === cat"
-      [class.pointer-events-none]="category() === cat"
-      [class.opacity-65]="category() === cat"
-      class="hover:scale-125 border-b-2 border-white lg:border-black text-white bg-black/80 backdrop-blur-sm hover:bg-black hover:border-white active:bg-black/90 relative hover:z-10 active:duration-100 hover:shadow-lg shadow-md px-2 py-1 md:px-4 md:py-2 font-semibold transition duration-200 ease-in-out active:scale-100 cursor-pointer"
-      (click)="setCategory(cat)"
-    >
-      {{ cat }}
-    </button>
-    }}
+  <ul class="flex flex-wrap justify-center gap-2 pt-6 md:gap-4">
+    @if (categories().length > 0) {
+      @for (cat of categories(); track cat) {
+        <button
+          type="button"
+          [disabled]="category() === cat"
+          [class.pointer-events-none]="category() === cat"
+          [class.opacity-65]="category() === cat"
+          class="relative cursor-pointer border-b-2 border-white bg-black/80 px-2 py-1 font-semibold text-white shadow-md backdrop-blur-sm transition duration-200 ease-in-out hover:z-10 hover:scale-125 hover:border-white hover:bg-black hover:shadow-lg active:scale-100 active:bg-black/90 active:duration-100 md:px-4 md:py-2 lg:border-black"
+          (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
+      }
+    }
   </ul>
 
   <!-- Items List -->
-  <ul class="max-w-6xl flex flex-wrap gap-4 justify-center min-h-[350px] my-10">
-    @if (items().length > 0) { @for (item of items(); track item.id) {
-    <item [item]="item" class="w-full mx-2 md:w-[350px] h-[160px]"></item>
-    }}
+  <ul class="my-10 flex min-h-[350px] max-w-6xl flex-wrap justify-center gap-4">
+    @if (items().length > 0) {
+      @for (item of items(); track item.id) {
+        <app-item [item]="item" class="mx-2 h-[160px] w-full md:w-[350px]"></app-item>
+      }
+    }
   </ul>
 </main>
