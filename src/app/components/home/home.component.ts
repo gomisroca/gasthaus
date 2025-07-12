@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { KontaktComponent } from '../kontakt/kontakt.component';
-import { LandingComponent } from '../landing/landing.component';
-import { SpeisekarteComponent } from '../speisekarte/speisekarte.component';
+import { KontaktComponent } from '@/app/components/kontakt/kontakt.component';
+import { LandingComponent } from '@/app/components/landing/landing.component';
+import { SpeisekarteComponent } from '@/app/components/speisekarte/speisekarte.component';
 
 @Component({
   selector: 'app-home',

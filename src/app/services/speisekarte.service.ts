@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { type Observable } from 'rxjs';
 
-import { type SpeisekarteItem } from '../../../types';
-import { environment } from '../../environments/environment';
+import { environment } from '@/environments/environment';
+import { type SpeisekarteItem } from '@/types';
 
 export interface NewSpeisekarteItem {
   name: string;

@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 
-import { type SpeisekarteItem } from '../../../../../types';
-import { SpeisekarteService } from '../../../services/speisekarte.service';
+import { SpeisekarteService } from '@/app/services/speisekarte.service';
+import { type SpeisekarteItem } from '@/types';
 
 @Component({
   selector: 'app-item-list',

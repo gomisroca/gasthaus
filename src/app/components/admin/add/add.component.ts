@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { type FormBuilder, type FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, type FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { type SpeisekarteService } from '../../../services/speisekarte.service';
+import { NewSpeisekarteItem, SpeisekarteService } from '@/app/services/speisekarte.service';
 
 @Component({
   selector: 'app-add-item',
@@ -55,9 +55,8 @@ export class AddComponent {
   }
 
   onSubmit() {
-    console.log('Submitting form', this.form.value);
     if (this.form.valid) {
-      this.service.addItem(this.form.value).subscribe({
+      this.service.addItem(this.form.value as NewSpeisekarteItem).subscribe({
         next: () => alert('Item added!'),
         error: (err) => console.error('Add failed:', err),
       });

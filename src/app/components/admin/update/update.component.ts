@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { type FormBuilder, type FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, type Router } from '@angular/router';
+import { FormBuilder, type FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { type SpeisekarteItem } from '../../../../../types';
-import { type NewSpeisekarteItem, type SpeisekarteService } from '../../../services/speisekarte.service';
+import { type NewSpeisekarteItem, SpeisekarteService } from '@/app/services/speisekarte.service';
+import { type SpeisekarteItem } from '@/types';
 
 @Component({
   selector: 'app-update-item',
