@@ -2,7 +2,7 @@ name: Release Tag
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   tag_release:
     if: ${{ !contains(toJson(github.event.commits.*.message),'#skip') }}
