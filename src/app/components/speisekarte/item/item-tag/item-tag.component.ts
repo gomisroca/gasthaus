@@ -42,13 +42,17 @@ export class ItemTagComponent {
   private isBrowser: boolean;
 
   private onClickOutside = (event: MouseEvent) => {
-    if (this.expanded() && !this.elementRef.nativeElement.contains(event.target)) {
+    if (
+      this.expanded() &&
+      this.elementRef.nativeElement &&
+      !this.elementRef.nativeElement.contains(event.target as Node)
+    ) {
       this.expanded.set(false);
     }
   };
 
   constructor(
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<HTMLElement>,
     @Inject(PLATFORM_ID) platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
