@@ -38,7 +38,7 @@ export class ItemTagComponent {
 
   tag = input.required<string>();
   expanded = signal(false);
-  timeout = signal<NodeJS.Timeout | undefined>(undefined);
+  timeout = signal<ReturnType<typeof setTimeout> | undefined>(undefined);
   private isBrowser: boolean;
 
   private onClickOutside = (event: MouseEvent) => {

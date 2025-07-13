@@ -1,4 +1,7 @@
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { provideAuthService } from '@/app/services/auth.service';
 
 import { LoginComponent } from './login.component';
 
@@ -8,6 +11,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideHttpClientTesting(), provideAuthService()],
       imports: [LoginComponent],
     }).compileComponents();
 
