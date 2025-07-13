@@ -1,12 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { EnvironmentProviders, Injectable, makeEnvironmentProviders } from '@angular/core';
 import { BehaviorSubject, type Observable, tap } from 'rxjs';
 
 import { environment } from '@/environments/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private tokenKey = 'jwt_token';
@@ -39,4 +37,8 @@ export class AuthService {
     if (typeof localStorage === 'undefined') return null; // SSR safe
     return localStorage.getItem(this.tokenKey);
   }
+}
+
+export function provideAuthService(): EnvironmentProviders {
+  return makeEnvironmentProviders([provideHttpClient(), AuthService]);
 }

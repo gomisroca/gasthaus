@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { EnvironmentProviders, Injectable, makeEnvironmentProviders } from '@angular/core';
 import { type Observable } from 'rxjs';
 
 import { environment } from '@/environments/environment';
@@ -15,9 +15,7 @@ export interface NewSpeisekarteItem {
   image: File;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class SpeisekarteService {
   private apiUrl = environment.apiUrl;
 
@@ -81,4 +79,8 @@ export class SpeisekarteService {
       withCredentials: true,
     });
   }
+}
+
+export function provideSpeisekarteService(): EnvironmentProviders {
+  return makeEnvironmentProviders([provideHttpClient(), SpeisekarteService]);
 }
