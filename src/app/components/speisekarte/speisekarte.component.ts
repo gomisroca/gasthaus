@@ -1,7 +1,8 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { startWith, switchMap } from 'rxjs';
 
 import { SpeisekarteService } from '@/app/services/speisekarte.service';
-import { SpeisekarteItem } from '@/types';
 
 import { ItemComponent } from './item/item.component';
 
@@ -13,40 +14,19 @@ import { ItemComponent } from './item/item.component';
 export class SpeisekarteComponent {
   private speisekarteService = inject(SpeisekarteService);
 
-  categories = signal<string[]>([]);
   category = signal<string | null>(null);
-  readonly items = signal<SpeisekarteItem[]>([]);
 
-  ngOnInit(): void {
-    // Fetch categories
-    this.speisekarteService.getCategories().subscribe({
-      next: (cats) => this.categories.set(cats),
-      error: (err) => console.error('Failed to load categories', err),
-    });
+  categories = toSignal(this.speisekarteService.getCategories(), { initialValue: [] }); // Load categories on startup, then update when they change
 
-    // Fetch all items initially
-    this.speisekarteService.getItems().subscribe({
-      next: (items) => this.items.set(items),
-      error: (err) => console.error('Failed to load items', err),
-    });
-  }
-
-  readonly effectRef = effect(() => {
-    const selected = this.category();
-    if (selected) {
-      this.speisekarteService.getCategory(selected).subscribe({
-        next: (items) => this.items.set(items),
-        error: (err) => console.error('Failed to load category items', err),
-      });
-    } else {
-      this.speisekarteService.getItems().subscribe({
-        next: (items) => this.items.set(items),
-        error: (err) => console.error('Failed to load items', err),
-      });
-    }
-  });
+  items = toSignal(
+    toObservable(this.category).pipe(
+      startWith(null), // Load all items on startup
+      switchMap((cat) => (cat ? this.speisekarteService.getCategoryItems(cat) : this.speisekarteService.getItems())) // If category is set, load items for that category, otherwise load all items
+    ),
+    { initialValue: [] }
+  );
 
   setCategory(category: string | null) {
-    this.category.update(() => category);
+    this.category.set(category);
   }
 }

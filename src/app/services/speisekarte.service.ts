@@ -33,7 +33,7 @@ export class SpeisekarteService {
     return this.http.get<string[]>(`${this.apiUrl}/speisekarte/categories`);
   }
 
-  getCategory(category: string): Observable<SpeisekarteItem[]> {
+  getCategoryItems(category: string): Observable<SpeisekarteItem[]> {
     return this.http.get<SpeisekarteItem[]>(`${this.apiUrl}/speisekarte/?category=${category}`);
   }
 
