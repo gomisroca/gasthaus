@@ -1,41 +1,71 @@
 <main
-  class="flex min-h-screen w-screen flex-col items-center justify-center bg-[url('/assets/images/background/3.jpg')] bg-cover bg-fixed bg-center text-white">
+  class="flex min-h-screen w-screen flex-col items-center bg-[url('/assets/images/background/3.jpg')] bg-cover bg-fixed bg-center text-white">
   <!-- Title section -->
-  <div class="flex items-center justify-center tracking-tight md:tracking-normal">
-    <h1 class="sticky top-0 text-5xl font-bold text-white drop-shadow-md sm:text-6xl md:text-9xl">Reservieren</h1>
+  <div class="pointer-events-none mt-20 flex flex-col items-center justify-center gap-4 lg:mt-60">
+    <h1 class="text-5xl font-bold text-white drop-shadow-md sm:text-6xl md:text-9xl">Reservieren</h1>
+    <span class="h-0.5 w-48 bg-white"></span>
   </div>
-  <section
-    class="my-6 flex w-full max-w-3xl flex-col gap-4 bg-black/80 p-6 backdrop-blur-xs md:w-3/4 md:backdrop-blur-sm lg:w-2/3">
-    <!-- Info section -->
-    <div class="flex flex-col">
-      <p>Sie finden uns in</p>
-      <p class="text-xl font-bold">Ostheimer Weg 5, 64832 Babenhausen</p>
-    </div>
-    <section class="flex flex-col text-lg">
-      <h6 class="text-2xl font-semibold">Öffnungszeiten</h6>
-      <p>
-        Montag bis Freitag von
-        <span class="font-bold">10:00 bis 22:00</span> Uhr.
-      </p>
-      <p>
-        Sonntag und Feiertag von
-        <span class="font-bold">16:00 bis 24:00</span> Uhr.
-      </p>
-    </section>
-    <!-- Kontakt section -->
-    <section class="flex flex-col">
-      <h6 class="text-2xl font-semibold">Kontakt</h6>
-      <p>Wir freuen uns, Sie bei uns zu sehen.</p>
-      <p>Bitte senden Sie uns Ihre Anfrage per E-Mail oder Telefon.</p>
 
-      <p>
-        E-Mail:
-        <a href="mailto:info@gasthaus.de" class="text-lg font-bold">info&#64;gasthaus.de</a>
-      </p>
-      <p>
-        Telefon:
-        <span class="text-lg font-bold">+49 (0) 176 25 55 55 55</span>
-      </p>
+  <div
+    class="my-6 flex w-full max-w-4xl flex-col items-center justify-center gap-4 bg-black/80 p-6 backdrop-blur-xs md:w-3/4 md:backdrop-blur-sm lg:w-2/3 lg:flex-row lg:rounded-xl">
+    <section class="flex flex-col gap-4">
+      <!-- Info section -->
+      <section class="flex flex-col text-lg">
+        <h6 class="border-b text-2xl font-semibold tracking-tight">Öffnungszeiten</h6>
+        <p>
+          Montag bis Freitag von
+          <span class="font-bold">10:00 bis 22:00</span> Uhr.
+        </p>
+        <p>
+          Sonntag und Feiertag von
+          <span class="font-bold">16:00 bis 24:00</span> Uhr.
+        </p>
+      </section>
+      <!-- Kontakt section -->
+      <section class="flex flex-col">
+        <h6 class="border-b text-2xl font-semibold tracking-tight">Kontakt</h6>
+        <p>Wir freuen uns, Sie bei uns zu sehen.</p>
+        <p>Bitte senden Sie uns Ihre Anfrage per E-Mail oder Telefon.</p>
+
+        <p>
+          E-Mail:
+          <a href="mailto:info@gasthaus.de" class="text-lg font-bold">info&#64;gasthaus.de</a>
+        </p>
+        <p>
+          Telefon:
+          <span class="text-lg font-bold">+49 (0) 176 25 55 55 55</span>
+        </p>
+      </section>
     </section>
-  </section>
+    <div class="mapouter">
+      <div class="gmap_canvas rounded-sm lg:rounded-xl">
+        <iframe
+          class="gmap_iframe"
+          width="100%"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Ostheimer Weg 5, 64832 Babenhausen&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+        </iframe>
+      </div>
+      <style>
+        .mapouter {
+          position: relative;
+          text-align: right;
+          width: 100%;
+          height: 400px;
+        }
+        .gmap_canvas {
+          overflow: hidden;
+          background: none !important;
+          width: 100%;
+          height: 400px;
+        }
+        .gmap_iframe {
+          height: 400px !important;
+        }
+      </style>
+    </div>
+  </div>
 </main>
