@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { type ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideSpeisekarteService(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
     provideClientHydration(withEventReplay()),
   ],
 };
