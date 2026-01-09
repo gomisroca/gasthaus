@@ -7,7 +7,7 @@ import { ItemDescriptionComponent } from './item-description.component';
 @Component({
   standalone: true,
   imports: [ItemDescriptionComponent],
-  template: `<app-item-tag [tag]="'vegan'"></app-item-tag>`,
+  templateUrl: './item-description.component.html',
 })
 class TestComponent {}
 
