@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { ItemDescriptionComponent } from './item-description.component';
 
@@ -13,8 +12,7 @@ describe('ItemDescriptionComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(ItemDescriptionComponent);
-    const itemDescriptionDebugEl = fixture.debugElement.query(By.directive(ItemDescriptionComponent));
-    component = itemDescriptionDebugEl.componentInstance as ItemDescriptionComponent;
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
