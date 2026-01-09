@@ -1,52 +1,48 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { shareReplay, startWith, switchMap } from 'rxjs';
 
 import { SpeisekarteService } from '@/app/services/speisekarte.service';
 import { SpeisekarteItem } from '@/types';
 
 import { ItemComponent } from './item/item.component';
+import { ItemDescriptionComponent } from './item/item-description/item-description.component';
 
 @Component({
   selector: 'app-speisekarte',
-  imports: [ItemComponent],
+  imports: [ItemComponent, ItemDescriptionComponent],
   templateUrl: './speisekarte.component.html',
 })
 export class SpeisekarteComponent {
   private speisekarteService = inject(SpeisekarteService);
 
-  categories = signal<string[]>([]);
   category = signal<string | null>(null);
-  readonly items = signal<SpeisekarteItem[]>([]);
 
-  ngOnInit(): void {
-    // Fetch categories
-    this.speisekarteService.getCategories().subscribe({
-      next: (cats) => this.categories.set(cats),
-      error: (err) => console.error('Failed to load categories', err),
-    });
+  categories = toSignal(this.speisekarteService.getCategories().pipe(shareReplay(1)), { initialValue: [] });
 
-    // Fetch all items initially
-    this.speisekarteService.getItems().subscribe({
-      next: (items) => this.items.set(items),
-      error: (err) => console.error('Failed to load items', err),
-    });
-  }
+  items = toSignal(
+    toObservable(this.category).pipe(
+      startWith(null), // emit null first to load all items
+      switchMap((cat) =>
+        cat
+          ? this.speisekarteService.getCategoryItems(cat).pipe(shareReplay(1))
+          : this.speisekarteService.getItems().pipe(shareReplay(1))
+      )
+    ),
+    { initialValue: [] }
+  );
 
-  readonly effectRef = effect(() => {
-    const selected = this.category();
-    if (selected) {
-      this.speisekarteService.getCategory(selected).subscribe({
-        next: (items) => this.items.set(items),
-        error: (err) => console.error('Failed to load category items', err),
-      });
-    } else {
-      this.speisekarteService.getItems().subscribe({
-        next: (items) => this.items.set(items),
-        error: (err) => console.error('Failed to load items', err),
-      });
-    }
-  });
+  selectedItem = signal<SpeisekarteItem | null>(null);
 
   setCategory(category: string | null) {
-    this.category.update(() => category);
+    this.category.set(category);
+  }
+
+  openDescription(item: SpeisekarteItem) {
+    this.selectedItem.set(item);
+  }
+
+  closeDescription() {
+    this.selectedItem.set(null);
   }
 }

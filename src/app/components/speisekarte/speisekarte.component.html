@@ -1,8 +1,9 @@
 <main
   class="flex min-h-screen w-screen flex-col items-center justify-start bg-[url('/assets/images/background/2.jpg')] bg-cover bg-fixed bg-center">
   <!-- Title section -->
-  <div class="flex h-[150px] items-end tracking-tight md:tracking-normal lg:h-[225px] lg:items-center xl:h-[300px]">
+  <div class="mt-20 mb-10 flex flex-col items-center tracking-tight md:tracking-normal lg:mt-60 lg:items-center">
     <h1 class="sticky top-0 text-5xl font-bold text-white drop-shadow-md sm:text-6xl md:text-9xl">Speisekarte</h1>
+    <span class="h-0.5 w-48 bg-white"></span>
   </div>
 
   <!-- Category Buttons -->
@@ -11,7 +12,7 @@
     [disabled]="category() === null"
     [class.pointer-events-none]="category() === null"
     [class.opacity-65]="category() === null"
-    class="relative cursor-pointer border-b-2 border-white bg-black/80 px-2 py-1 font-semibold text-white shadow-md backdrop-blur-sm transition duration-200 ease-in-out hover:z-10 hover:scale-125 hover:border-white hover:bg-black hover:shadow-lg active:scale-100 active:bg-black/90 active:duration-100 md:px-4 md:py-2 lg:border-black"
+    class="relative inline-flex cursor-pointer items-center justify-center rounded-full bg-black/80 px-6 py-3 font-semibold tracking-wide text-white uppercase shadow-md backdrop-blur-sm transition-all duration-300 ease-out hover:scale-105 hover:bg-black hover:shadow-lg focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-black focus:outline-none active:scale-95"
     (click)="setCategory(null)">
     Alle Kategorien
   </button>
@@ -23,7 +24,7 @@
           [disabled]="category() === cat"
           [class.pointer-events-none]="category() === cat"
           [class.opacity-65]="category() === cat"
-          class="relative cursor-pointer border-b-2 border-white bg-black/80 px-2 py-1 font-semibold text-white shadow-md backdrop-blur-sm transition duration-200 ease-in-out hover:z-10 hover:scale-125 hover:border-white hover:bg-black hover:shadow-lg active:scale-100 active:bg-black/90 active:duration-100 md:px-4 md:py-2 lg:border-black"
+          class="relative inline-flex cursor-pointer items-center justify-center rounded-full bg-black/80 px-6 py-3 font-semibold tracking-wide text-white uppercase shadow-md backdrop-blur-sm transition-all duration-300 ease-out hover:scale-105 hover:bg-black hover:shadow-lg focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-black focus:outline-none active:scale-95"
           (click)="setCategory(cat)">
           {{ cat }}
         </button>
@@ -32,11 +33,13 @@
   </ul>
 
   <!-- Items List -->
-  <ul class="my-10 flex min-h-[350px] max-w-6xl flex-wrap justify-center gap-4">
+  <ul class="my-10 flex min-h-87.5 max-w-6xl flex-wrap justify-center gap-4">
     @if (items().length > 0) {
       @for (item of items(); track item.id) {
-        <app-item [item]="item" class="mx-2 h-[160px] w-full md:w-[350px]"></app-item>
+        <app-item [item]="item" class="mx-2 h-40 w-full md:w-87.5" (openDescription)="openDescription($event)">
+        </app-item>
       }
     }
   </ul>
 </main>
+<app-item-description [item]="selectedItem()" (close)="closeDescription()"></app-item-description>

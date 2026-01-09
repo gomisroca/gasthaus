@@ -1,0 +1,54 @@
+@if (item) {
+  <div class="fixed inset-0 z-999 bg-black/60 backdrop-blur-sm" (click)="closeOverlay()">
+    <div
+      class="animate-slide-up absolute right-0 bottom-0 left-0 flex flex-col items-center justify-between gap-4 rounded-t-2xl bg-black p-4 pb-0 text-white"
+      (click)="$event.stopPropagation()">
+      <!-- Header -->
+      <div class="flex items-start gap-4">
+        <app-item-image [image]="item.image" [name]="item.name" class="max-w-64"> </app-item-image>
+        <div class="flex flex-col gap-1">
+          <h3 class="font-semibold md:text-xl">
+            {{ item.name }}
+          </h3>
+          <span class="h-0.5 w-20 bg-white"></span>
+          <span class="font-bold md:text-lg"> {{ item.price }}€ </span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="max-w-2xl leading-relaxed">
+        {{ item.description }}
+      </p>
+
+      <!-- Ingredients -->
+      <div class="flex w-full max-w-2xl flex-row justify-evenly gap-2">
+        <section class="flex flex-col gap-1">
+          <h3 class="text-sm font-bold md:text-base">Zutaten</h3>
+          <span class="h-0.5 w-20 bg-white"></span>
+          <ul class="items-center gap-1 overflow-hidden">
+            @for (ingredient of item.ingredients; track ingredient) {
+              <li>{{ ingredient[0].toLocaleUpperCase() + ingredient.slice(1) }}</li>
+            }
+          </ul>
+        </section>
+
+        <!-- Allergens -->
+        <section class="flex flex-col gap-1">
+          <h3 class="text-sm font-bold md:text-base">Allergene und Beratung</h3>
+          <span class="h-0.5 w-20 bg-white"></span>
+          <ul class="grid grid-rows-4 items-center gap-1 overflow-hidden">
+            @for (tag of item.tags; track tag) {
+              <app-item-tag [tag]="tag"></app-item-tag>
+            }
+          </ul>
+        </section>
+      </div>
+
+      <button
+        class="w-full max-w-2xl cursor-pointer rounded-xl py-4 text-white/60 transition duration-300 ease-out hover:bg-white/10 hover:text-white"
+        (click)="closeOverlay()">
+        ✕
+      </button>
+    </div>
+  </div>
+}

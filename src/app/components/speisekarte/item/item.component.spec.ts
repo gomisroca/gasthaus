@@ -14,6 +14,7 @@ import { ItemComponent } from './item.component';
       description: 'This is a test item',
       price: 10,
       categories: ['vegan'],
+      ingredients: ['eggs', 'cheese'],
       tags: ['spicy'],
       seasonal: false,
       image: null,
