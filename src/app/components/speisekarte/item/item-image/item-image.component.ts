@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     [src]="imageSrc"
     alt="{{ name }}"
     (error)="onImageError($event)"
-    class="h-32 w-32 rounded-xl border-2 border-white/10 object-cover" />`,
+    class="rounded-xl object-contain" />`,
 })
 export class ItemImageComponent {
   @Input() name!: string;

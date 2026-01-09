@@ -1,14 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { startWith, switchMap } from 'rxjs';
+import { shareReplay, startWith, switchMap } from 'rxjs';
 
 import { SpeisekarteService } from '@/app/services/speisekarte.service';
+import { SpeisekarteItem } from '@/types';
 
 import { ItemComponent } from './item/item.component';
+import { ItemDescriptionComponent } from './item/item-description/item-description.component';
 
 @Component({
   selector: 'app-speisekarte',
-  imports: [ItemComponent],
+  imports: [ItemComponent, ItemDescriptionComponent],
   templateUrl: './speisekarte.component.html',
 })
 export class SpeisekarteComponent {
@@ -16,17 +18,31 @@ export class SpeisekarteComponent {
 
   category = signal<string | null>(null);
 
-  categories = toSignal(this.speisekarteService.getCategories(), { initialValue: [] }); // Load categories on startup, then update when they change
+  categories = toSignal(this.speisekarteService.getCategories().pipe(shareReplay(1)), { initialValue: [] });
 
   items = toSignal(
     toObservable(this.category).pipe(
-      startWith(null), // Load all items on startup
-      switchMap((cat) => (cat ? this.speisekarteService.getCategoryItems(cat) : this.speisekarteService.getItems())) // If category is set, load items for that category, otherwise load all items
+      startWith(null), // emit null first to load all items
+      switchMap((cat) =>
+        cat
+          ? this.speisekarteService.getCategoryItems(cat).pipe(shareReplay(1))
+          : this.speisekarteService.getItems().pipe(shareReplay(1))
+      )
     ),
     { initialValue: [] }
   );
 
+  selectedItem = signal<SpeisekarteItem | null>(null);
+
   setCategory(category: string | null) {
     this.category.set(category);
+  }
+
+  openDescription(item: SpeisekarteItem) {
+    this.selectedItem.set(item);
+  }
+
+  closeDescription() {
+    this.selectedItem.set(null);
   }
 }

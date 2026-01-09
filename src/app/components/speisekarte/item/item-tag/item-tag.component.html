@@ -1,11 +1,4 @@
-<li
-  class="relative flex cursor-pointer items-center justify-center rounded-full text-white transition-all duration-300 ease-out hover:scale-110 hover:bg-white/10"
-  (click)="handleClick()">
+<li>
   {{ tagData[tag()].icon }}
-  @if (expanded()) {
-    <div
-      class="absolute -bottom-8 z-999 flex w-fit items-center justify-center rounded-xl border border-white/10 bg-black/95 px-2 py-1 shadow-md">
-      {{ tagData[tag()].text }}
-    </div>
-  }
+  {{ tagData[tag()].text }}
 </li>

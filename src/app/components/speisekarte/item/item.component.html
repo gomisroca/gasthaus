@@ -1,20 +1,16 @@
 <li
-  class="relative flex h-full cursor-default justify-between gap-2 rounded-xl bg-black/80 p-2 text-white shadow-md backdrop-blur-sm transition-all duration-300 ease-out hover:z-50 hover:scale-120 hover:bg-black hover:shadow-lg">
-  <section class="flex items-center">
+  class="relative flex h-full cursor-pointer justify-between overflow-hidden rounded-xl text-white shadow-md transition-all duration-300 ease-out hover:z-50 hover:scale-105 hover:shadow-lg"
+  (click)="onTap($event)">
+  <!-- Image section -->
+  <section class="flex h-full w-full">
     <app-item-image [image]="item().image" [name]="item().name"></app-item-image>
   </section>
-  <section class="flex flex-1 flex-col items-start gap-2 px-2">
+
+  <!-- Top overlay with intentional gap -->
+  <section
+    class="absolute top-2 right-2 left-2 z-10 flex items-center justify-between gap-2 rounded-xl bg-black/90 p-2 backdrop-blur-sm">
     <h3 class="font-semibold md:text-lg">{{ item().name }}</h3>
-    <p class="line-clamp-3 w-full flex-1 border-t border-b border-white/60 text-xs tracking-tight sm:text-sm">
-      {{ item().description }}
-    </p>
-    <section class="flex w-full items-center justify-between">
-      <ul class="flex items-center gap-1">
-        @for (tag of item().tags; track tag) {
-          <app-item-tag [tag]="tag"></app-item-tag>
-        }
-      </ul>
-      <span class="font-bold">{{ item().price }}€</span>
-    </section>
+
+    <span class="text-sm font-bold md:text-base">{{ item().price }}€</span>
   </section>
 </li>

@@ -36,8 +36,10 @@
   <ul class="my-10 flex min-h-87.5 max-w-6xl flex-wrap justify-center gap-4">
     @if (items().length > 0) {
       @for (item of items(); track item.id) {
-        <app-item [item]="item" class="mx-2 h-40 w-full md:w-87.5"></app-item>
+        <app-item [item]="item" class="mx-2 h-40 w-full md:w-87.5" (openDescription)="openDescription($event)">
+        </app-item>
       }
     }
   </ul>
 </main>
+<app-item-description [item]="selectedItem()" (close)="closeDescription()"></app-item-description>
