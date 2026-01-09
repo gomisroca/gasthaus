@@ -40,6 +40,15 @@
   </label>
 
   <label class="flex flex-col">
+    <h6 class="text-lg font-bold tracking-tight uppercase">Ingredients (comma-separated)</h6>
+    <input
+      type="text"
+      (input)="onIngredientsInput($event)"
+      placeholder="Milch, Butter, Honig, ..."
+      class="cursor-pointer rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100" />
+  </label>
+
+  <label class="flex flex-col">
     <h6 class="text-lg font-bold tracking-tight uppercase">Tags (comma-separated)</h6>
     <input
       type="text"

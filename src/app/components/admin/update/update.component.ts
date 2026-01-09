@@ -22,6 +22,7 @@ export class UpdateComponent {
     description: '',
     price: 0,
     categories: [],
+    ingredients: [],
     tags: [],
     seasonal: false,
     image: null,
@@ -42,6 +43,7 @@ export class UpdateComponent {
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       categories: [[] as string[]],
+      ingredients: [[] as string[]],
       tags: [[] as string[]],
       seasonal: [false],
       image: [null],
@@ -71,6 +73,16 @@ export class UpdateComponent {
       .filter((s) => s !== '');
 
     this.form.patchValue({ categories });
+  }
+
+  onIngredientsInput(event: Event) {
+    const input = (event.target as HTMLInputElement).value;
+    const ingredients = input
+      .split(',')
+      .map((s) => s.trim())
+      .filter((s) => s !== '');
+
+    this.form.patchValue({ ingredients });
   }
 
   onTagsInput(event: Event) {

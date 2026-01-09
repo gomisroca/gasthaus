@@ -3,6 +3,7 @@ export interface SpeisekarteItem {
   name: string;
   description: string;
   categories: string[];
+  ingredients: string[];
   tags: string[];
   price: number;
   image: string | null;
