@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 
 import { AuthService } from '@/app/services/auth.service';
 
@@ -12,42 +12,46 @@ import { AuthService } from '@/app/services/auth.service';
     <form (submit)="login()">
       <input type="email" [(ngModel)]="email" name="email" placeholder="your@email.com" required />
       <input type="password" [(ngModel)]="password" name="password" placeholder="your-password" required />
-      <button type="submit">Login</button>
-      <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+      @if (errorMsg) {
+        <p class="error">{{ errorMsg }}</p>
+      }
     </form>
   `,
-  standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
 })
 export class LoginComponent {
   email = '';
   password = '';
   errorMsg = '';
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.authService.isLoggedIn$
       .pipe(
-        filter((loggedIn) => loggedIn), // only act if true
-        take(1)
+        filter((loggedIn) => loggedIn),
+        takeUntilDestroyed()
       )
       .subscribe(() => {
         void this.router.navigate(['/admin']);
       });
   }
 
-  login() {
+  login(): void {
     this.errorMsg = '';
+    this.isLoading = true;
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        void this.router.navigate(['admin']);
+        void this.router.navigate(['/admin']);
       },
       error: () => {
         this.errorMsg = 'Login failed. Please check your credentials.';
+        this.isLoading = false;
       },
     });
   }

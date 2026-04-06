@@ -1,7 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
-import { provideAuthService } from '@/app/services/auth.service';
+import { AuthService } from '@/app/services/auth.service';
 
 import { LoginComponent } from './login.component';
 
@@ -11,7 +13,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideHttpClientTesting(), provideAuthService()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), AuthService],
       imports: [LoginComponent],
     }).compileComponents();
 
