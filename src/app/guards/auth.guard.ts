@@ -1,25 +1,12 @@
-import { Injectable } from '@angular/core';
-import { type CanActivate, Router, type UrlTree } from '@angular/router';
-import { map, type Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { type CanActivateFn, Router } from '@angular/router';
+import { map } from 'rxjs';
 
 import { AuthService } from '@/app/services/auth.service';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-  constructor(
-    private auth: AuthService,
-    private router: Router
-  ) {}
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
 
-  canActivate(): Observable<boolean | UrlTree> {
-    return this.auth.isLoggedIn$.pipe(
-      map((loggedIn) => {
-        if (loggedIn) {
-          return true;
-        }
-        // Redirect if not authenticated
-        return this.router.createUrlTree(['/']);
-      })
-    );
-  }
-}
+  return auth.isLoggedIn$.pipe(map((loggedIn) => loggedIn || router.createUrlTree(['/'])));
+};
