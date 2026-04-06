@@ -1,5 +1,5 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { EnvironmentProviders, Injectable, makeEnvironmentProviders } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, type Observable, tap } from 'rxjs';
 
 import { environment } from '@/environments/environment';
@@ -14,9 +14,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  private isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])) as { exp?: number };
+      return typeof payload.exp !== 'number' || payload.exp * 1000 < Date.now();
+    } catch {
+      return true;
+    }
+  }
+
   private hasToken(): boolean {
-    if (typeof localStorage === 'undefined') return false; // SSR safe
-    return !!localStorage.getItem(this.tokenKey);
+    if (typeof localStorage === 'undefined') return false;
+    const token = localStorage.getItem(this.tokenKey);
+    if (!token || this.isTokenExpired(token)) {
+      localStorage.removeItem(this.tokenKey);
+      return false;
+    }
+    return true;
   }
 
   login(credentials: { email: string; password: string }): Observable<{ token: string }> {
@@ -34,11 +48,27 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (typeof localStorage === 'undefined') return null; // SSR safe
-    return localStorage.getItem(this.tokenKey);
+    if (typeof localStorage === 'undefined') return null;
+    const token = localStorage.getItem(this.tokenKey);
+    if (!token || this.isTokenExpired(token)) {
+      localStorage.removeItem(this.tokenKey);
+      this._isLoggedIn.next(false);
+      return null;
+    }
+    return token;
   }
-}
 
-export function provideAuthService(): EnvironmentProviders {
-  return makeEnvironmentProviders([provideHttpClient(), AuthService]);
+  refreshToken(): Observable<{ token: string }> {
+    const token = this.getToken();
+    return this.http
+      .get<{ token: string }>(`${this.apiUrl}/auth/refresh-token`, {
+        params: { token: token ?? '' },
+      })
+      .pipe(
+        tap((response) => {
+          localStorage.setItem(this.tokenKey, response.token);
+          this._isLoggedIn.next(true);
+        })
+      );
+  }
 }

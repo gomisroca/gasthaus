@@ -1,14 +1,15 @@
+import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { provideSpeisekarteService, SpeisekarteService } from './speisekarte.service';
+import { SpeisekarteService } from './speisekarte.service';
 
 describe('SpeisekarteService', () => {
   let service: SpeisekarteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClientTesting(), provideSpeisekarteService()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), SpeisekarteService],
     });
     service = TestBed.inject(SpeisekarteService);
   });
