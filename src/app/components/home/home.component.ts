@@ -7,7 +7,6 @@ import { SpeisekarteComponent } from '@/app/components/speisekarte/speisekarte.c
 @Component({
   selector: 'app-home',
   imports: [SpeisekarteComponent, KontaktComponent, LandingComponent],
-  standalone: true,
   templateUrl: './home.component.html',
 })
 export class HomeComponent {}
