@@ -5,7 +5,7 @@ export interface SpeisekarteItem {
   categories: string[];
   ingredients: string[];
   tags: string[];
-  price: number;
+  priceCents: number;
   image: string | null;
   seasonal: boolean;
 }
