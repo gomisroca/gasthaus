@@ -1,23 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-item-image',
   template: `<img
-    [src]="imageSrc"
-    alt="{{ name }}"
+    [src]="imageSrc()"
+    [alt]="name()"
     (error)="onImageError($event)"
     class="rounded-xl object-contain" />`,
 })
 export class ItemImageComponent {
-  @Input() name!: string;
-  @Input() image: string | null = null;
+  name = input.required<string>();
+  image = input<string | null>(null);
 
-  get imageSrc(): string {
-    return this.image ?? 'assets/images/placeholder.jpg';
-  }
+  private readonly placeholder = 'assets/images/placeholder.jpg';
 
-  onImageError(event: Event) {
+  imageSrc = computed(() => this.image() ?? this.placeholder);
+
+  onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/images/placeholder.jpg';
+    img.src = this.placeholder;
   }
 }
