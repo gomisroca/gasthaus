@@ -1,16 +1,13 @@
-<li
-  class="relative flex h-full cursor-pointer justify-between overflow-hidden rounded-xl text-white shadow-md transition-all duration-300 ease-out hover:z-50 hover:scale-105 hover:shadow-lg"
-  (click)="onTap($event)">
-  <!-- Image section -->
-  <section class="flex h-full w-full">
-    <app-item-image [image]="item().image" [name]="item().name"></app-item-image>
-  </section>
+<!-- Image section -->
+<section class="flex h-full w-full">
+  <app-item-image [image]="item().image" [name]="item().name"></app-item-image>
+</section>
 
-  <!-- Top overlay with intentional gap -->
-  <section
-    class="absolute top-2 right-2 left-2 z-10 flex items-center justify-between gap-2 rounded-xl bg-black/90 p-2 backdrop-blur-sm">
-    <h3 class="font-semibold md:text-lg">{{ item().name }}</h3>
-
-    <span class="text-sm font-bold md:text-base">{{ item().price }}€</span>
-  </section>
-</li>
+<!-- Top overlay -->
+<section
+  class="absolute top-2 right-2 left-2 z-10 flex items-center justify-between gap-2 rounded-xl bg-black/90 p-2 backdrop-blur-sm">
+  <h3 class="font-semibold md:text-lg">{{ item().name }}</h3>
+  <span class="text-sm font-bold md:text-base">{{
+    item().priceCents / 100 | currency: 'EUR' : 'symbol' : '1.2-2' : 'de'
+  }}</span>
+</section>
