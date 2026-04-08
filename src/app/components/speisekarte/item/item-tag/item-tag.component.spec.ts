@@ -1,26 +1,25 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ItemTagComponent } from './item-tag.component';
 
 @Component({
-  standalone: true,
   imports: [ItemTagComponent],
   template: `<app-item-tag [tag]="'vegan'"></app-item-tag>`,
 })
-class TestComponent {}
+class TestHostComponent {}
 
 describe('ItemTagComponent', () => {
   let component: ItemTagComponent;
-  let fixture: ComponentFixture<TestComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestComponent],
+      imports: [TestHostComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     const itemTagDebugEl = fixture.debugElement.query(By.directive(ItemTagComponent));
     component = itemTagDebugEl.componentInstance as ItemTagComponent;
     fixture.detectChanges();
