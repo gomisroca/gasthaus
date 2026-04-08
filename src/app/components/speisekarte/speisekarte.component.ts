@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { shareReplay, startWith, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 import { SpeisekarteService } from '@/app/services/speisekarte.service';
 import { SpeisekarteItem } from '@/types';
@@ -18,31 +18,26 @@ export class SpeisekarteComponent {
 
   category = signal<string | null>(null);
 
-  categories = toSignal(this.speisekarteService.getCategories().pipe(shareReplay(1)), { initialValue: [] });
+  categories = toSignal(this.speisekarteService.getCategories(), { initialValue: [] });
 
   items = toSignal(
     toObservable(this.category).pipe(
-      startWith(null), // emit null first to load all items
-      switchMap((cat) =>
-        cat
-          ? this.speisekarteService.getCategoryItems(cat).pipe(shareReplay(1))
-          : this.speisekarteService.getItems().pipe(shareReplay(1))
-      )
+      switchMap((cat) => (cat ? this.speisekarteService.getCategoryItems(cat) : this.speisekarteService.getItems()))
     ),
     { initialValue: [] }
   );
 
   selectedItem = signal<SpeisekarteItem | null>(null);
 
-  setCategory(category: string | null) {
+  setCategory(category: string | null): void {
     this.category.set(category);
   }
 
-  openDescription(item: SpeisekarteItem) {
+  openDescription(item: SpeisekarteItem): void {
     this.selectedItem.set(item);
   }
 
-  closeDescription() {
+  closeDescription(): void {
     this.selectedItem.set(null);
   }
 }
