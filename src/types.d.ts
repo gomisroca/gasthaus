@@ -8,4 +8,6 @@ export interface SpeisekarteItem {
   priceCents: number;
   image: string | null;
   seasonal: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
