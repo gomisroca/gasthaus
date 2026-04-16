@@ -10,6 +10,7 @@ export interface NewSpeisekarteItem {
   description: string;
   priceCents: number;
   categories: string[];
+  ingredients: string[];
   tags: string[];
   seasonal: boolean;
   image: File;
