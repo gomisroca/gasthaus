@@ -1,34 +1,31 @@
 import { Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 import { SpeisekarteService } from '@/app/services/speisekarte.service';
-import { type SpeisekarteItem } from '@/types';
 
 @Component({
   selector: 'app-item-list',
+  imports: [RouterLink],
   templateUrl: './item-list.component.html',
 })
 export class ItemListComponent {
   private speisekarteService = inject(SpeisekarteService);
 
-  readonly items = signal<SpeisekarteItem[]>([]);
+  readonly items = toSignal(this.speisekarteService.getItems(), { initialValue: [] });
+  pendingDeleteId = signal<string | null>(null);
 
-  ngOnInit(): void {
-    this.speisekarteService.getItems().subscribe({
-      next: (items) => this.items.set(items),
-      error: (err) => console.error('Failed to load items', err),
-    });
+  confirmRemove(id: string): void {
+    this.pendingDeleteId.set(id);
   }
 
-  onRemove(id: string) {
-    const confirmed = confirm('Are you sure you want to remove this item?');
-    if (!confirmed) return;
+  cancelRemove(): void {
+    this.pendingDeleteId.set(null);
+  }
+
+  onRemove(id: string): void {
     this.speisekarteService.deleteItem(id).subscribe({
-      next: () => {
-        alert('Item removed!');
-        const currentItems = this.items();
-        const updatedItems = currentItems.filter((item) => item.id !== id);
-        this.items.set(updatedItems);
-      },
+      next: () => this.pendingDeleteId.set(null),
       error: (err) => console.error('Remove failed:', err),
     });
   }

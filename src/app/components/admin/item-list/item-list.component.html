@@ -1,25 +1,47 @@
-<ul class="my-10 flex min-h-[350px] flex-wrap justify-center gap-4">
-  @if (items().length > 0) {
-    @for (item of items(); track item.id) {
-      <div
-        class="flex flex-col rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100">
-        <section class="flex flex-col items-center">
-          <img [src]="item.image" alt="item.name" class="h-[100px]" />
-          <h1>{{ item.name }}</h1>
-        </section>
-        <section class="flex items-center gap-8 p-4">
-          <a
-            [href]="'/admin/update/' + item.id"
-            class="cursor-pointer rounded-sm bg-sky-400 p-1 font-extrabold tracking-widest text-white uppercase shadow-md transition duration-200 ease-in-out hover:scale-110 hover:bg-sky-500 active:scale-90 active:duration-100"
-            >Update</a
-          >
-          <button
-            (click)="onRemove(item.id)"
-            class="cursor-pointer rounded-sm bg-sky-400 p-1 font-extrabold tracking-widest text-white uppercase shadow-md transition duration-200 ease-in-out hover:scale-110 hover:bg-sky-500 active:scale-90 active:duration-100">
-            Remove
-          </button>
-        </section>
-      </div>
-    }
+<ul class="my-10 flex min-h-87.5 flex-wrap justify-center gap-4">
+  @if (items().length === 0) {
+    <p class="text-neutral-500">No items found.</p>
+  }
+  @for (item of items(); track item.id) {
+    <li
+      class="flex flex-col rounded-sm border-2 border-neutral-300 bg-neutral-100 p-2 transition duration-200 ease-in-out hover:scale-110 hover:border-neutral-500 hover:bg-neutral-200 active:scale-90 active:duration-100">
+      <section class="flex flex-col items-center">
+        <img [src]="item.image" [alt]="item.name" class="h-25" />
+        <h3>{{ item.name }}</h3>
+      </section>
+      <section class="flex items-center gap-8 p-4">
+        <a [routerLink]="['/admin/update', item.id]">
+          class="cursor-pointer rounded-sm bg-sky-400 p-1 font-extrabold tracking-widest text-white uppercase shadow-md
+          transition duration-200 ease-in-out hover:scale-110 hover:bg-sky-500 active:scale-90 active:duration-100">
+          Update
+        </a>
+        <button
+          type="button"
+          (click)="confirmRemove(item.id)"
+          class="cursor-pointer rounded-sm bg-sky-400 p-1 font-extrabold tracking-widest text-white uppercase shadow-md transition duration-200 ease-in-out hover:scale-110 hover:bg-sky-500 active:scale-90 active:duration-100">
+          Remove
+        </button>
+      </section>
+
+      @if (pendingDeleteId() === item.id) {
+        <div class="flex flex-col items-center gap-2 border-t border-neutral-300 pt-2 text-sm">
+          <p>Are you sure?</p>
+          <div class="flex gap-2">
+            <button
+              type="button"
+              (click)="onRemove(item.id)"
+              class="rounded-sm bg-red-500 px-2 py-1 text-white hover:bg-red-600">
+              Confirm
+            </button>
+            <button
+              type="button"
+              (click)="cancelRemove()"
+              class="rounded-sm bg-neutral-400 px-2 py-1 text-white hover:bg-neutral-500">
+              Cancel
+            </button>
+          </div>
+        </div>
+      }
+    </li>
   }
 </ul>

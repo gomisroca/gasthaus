@@ -1,7 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
-import { provideSpeisekarteService } from '@/app/services/speisekarte.service';
+import { SpeisekarteService } from '@/app/services/speisekarte.service';
 
 import { ItemListComponent } from './item-list.component';
 
@@ -11,7 +13,7 @@ describe('ItemListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [provideHttpClientTesting(), provideSpeisekarteService()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), SpeisekarteService],
       imports: [ItemListComponent],
     }).compileComponents();
 
