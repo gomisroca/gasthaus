@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import { Component, LOCALE_ID } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ItemComponent } from './item.component';
+
+registerLocaleData(localeDe);
 
 @Component({
   imports: [ItemComponent],
@@ -20,6 +24,7 @@ import { ItemComponent } from './item.component';
       createdAt: '2024-01-01',
       updatedAt: '2024-01-01',
     }"></app-item>`,
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
 class TestHostComponent {}
 

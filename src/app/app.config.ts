@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { type ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import localeDe from '@angular/common/locales/de';
+import { type ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
@@ -7,6 +9,8 @@ import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { SpeisekarteService } from './services/speisekarte.service';
+
+registerLocaleData(localeDe);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     AuthService,
     SpeisekarteService,
+    { provide: LOCALE_ID, useValue: 'de' },
   ],
 };
