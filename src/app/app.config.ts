@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { type ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { type ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
@@ -16,6 +16,5 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     AuthService,
     SpeisekarteService,
-    { provide: LOCALE_ID, useValue: 'de' },
   ],
 };
